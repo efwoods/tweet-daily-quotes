@@ -20,7 +20,6 @@ import os
 import re
 import json
 import requests
-import redis
 from requests.auth import AuthBase, HTTPBasicAuth
 from requests_oauthlib import OAuth2Session, TokenUpdated
 from flask import Flask, request, redirect, session, url_for, render_template
@@ -29,10 +28,6 @@ import random
 import configparser
 
 config = dotenv_values('./config/.env')
-
-
-# Since you will be using Redis as your database, you will need to get the environment variable from the previous step and save it into a variable named r that can be called whenever we need to access the database. Using an environment variable allows us to be flexible because you will use an internal connection string when you deploy your bot.
-r = redis.from_url(config["REDIS_URL"])
 
 # You will need to set a variable for your app to initialize it, as is typical at the start of every Flask app. You can also create a secret key for your app, so it’s a random string using the os package.
 app = Flask(__name__)
@@ -115,8 +110,6 @@ def demo():
     )
     session["oauth_state"] = state
     return redirect(authorization_url)
-
-# After the account gives permission to your App you can get the access token. You can format your token to save it as a JSON object into a Redis key/value store so that you can refresh the token the next time your bot Tweets. 
 
 # After you save the token, you can parse the cat fact using the function parse_fav_quote. You will also need to format the fav_quote  into a JSON object. After, you can pass the payload in as a payload into your post_tweet.
 @app.route("/oauth/callback", methods=["GET"])
