@@ -7,3 +7,5 @@ curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo 
 
 sudo apt update
 sudo apt install gh
+
+git config --global user.email "22337004+efwoods@users.noreply.github.com"
