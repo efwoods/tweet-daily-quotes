@@ -15,5 +15,6 @@ sudo apt install gh
 
 git config --global user.email "22337004+efwoods@users.noreply.github.com"
 
+source ./.bash_aliases
 # reset email for config
 # git commit --amend --reset-author
