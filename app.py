@@ -14,9 +14,6 @@ import random
 import configparser
 app = Flask(__name__)
 
-
-
-
 config = dotenv_values('./config/.env')
 
 # You will need to set a variable for your app to initialize it, as is typical at the start of every Flask app. You can also create a secret key for your app, so it’s a random string using the os package.
@@ -89,7 +86,7 @@ def get_prior_tweets():
 # expansions,tweet.fields,media.fields,poll.fields,place.fields,user.fields
 #query_params = {'query': '#depressed','tweet.fields': 'author_id'}
 
-@app.route("/")
+@app.route("/parse")
 def hello_world():
     return parse_fav_quote()
     # return render_template("index.html", title="Hello")
@@ -101,7 +98,7 @@ def parse_fav_quote():
     return fav_quote["quotes"][quote]
 
 # At this point, you’ll want to set up the landing page for your bot to authenticate. Your bot will log into a page that lists the permissions needed.
-@app.route("/home")
+@app.route("/")
 def demo():
     global twitter
     twitter = make_token()
