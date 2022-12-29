@@ -121,3 +121,7 @@ Werkzeug==2.2.2
 wrapt==1.14.1
 requests
 python_dotenv
+redis 
+requests_oauthlib 
+flask 
+python-dotenv

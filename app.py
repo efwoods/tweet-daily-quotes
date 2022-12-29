@@ -1,20 +1,6 @@
 from flask import Flask, render_template
 import requests, random
-
-app = Flask(__name__)
-
-@app.route("/quote")
-def hello_world():
-    return parse_fav_quote()
-    # return render_template("index.html", title="Hello")
-
-def parse_fav_quote():
-    url = "https://efwoods.github.io/EvanWoodsFavoriteQuotes/quotesTwitterDB.json"
-    fav_quote = requests.request("GET", url).json()
-    quote = random.randint(0, len(fav_quote["quotes"]))
-    return fav_quote["quotes"][quote]
-
-    import base64
+import base64
 import hashlib
 import os
 import re
@@ -26,6 +12,10 @@ from flask import Flask, request, redirect, session, url_for, render_template
 from dotenv import dotenv_values
 import random
 import configparser
+app = Flask(__name__)
+
+
+
 
 config = dotenv_values('./config/.env')
 
@@ -99,9 +89,19 @@ def get_prior_tweets():
 # expansions,tweet.fields,media.fields,poll.fields,place.fields,user.fields
 #query_params = {'query': '#depressed','tweet.fields': 'author_id'}
 
+@app.route("/")
+def hello_world():
+    return parse_fav_quote()
+    # return render_template("index.html", title="Hello")
+
+def parse_fav_quote():
+    url = "https://efwoods.github.io/EvanWoodsFavoriteQuotes/quotesTwitterDB.json"
+    fav_quote = requests.request("GET", url).json()
+    quote = random.randint(0, len(fav_quote["quotes"]))
+    return fav_quote["quotes"][quote]
 
 # At this point, you’ll want to set up the landing page for your bot to authenticate. Your bot will log into a page that lists the permissions needed.
-@app.route("/")
+@app.route("/home")
 def demo():
     global twitter
     twitter = make_token()
